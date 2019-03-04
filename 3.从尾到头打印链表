@@ -1,0 +1,38 @@
+从尾到头打印链表
+输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。
+
+//不动链表
+vector<int> printListFromTailToHead(ListNode* head) {
+    vector<int> a, b;
+    int length = 0;
+    while(head){
+        a.push_back(head->val);
+        length++;
+        head = head->next;
+    }
+    while(length){
+        length--;
+        b.push_back(a[length]);
+    }
+    return b;
+}
+
+//原地逆转链表
+vector<int> printListFromTailToHead(ListNode* head) {
+    vector<int> a;
+    if(head)
+        return a;
+    ListNode* pre=head;
+    ListNode* buf=head;
+    while(head->next){
+        buf = head->next;
+        head->next = buf->next;
+        buf->next = pre;
+        pre = buf;
+    }
+    while(buf){
+        a.push_back(buf->val);
+        buf = buf->next;
+    }
+    return a;
+}
