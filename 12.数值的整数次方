@@ -1,0 +1,41 @@
+数值的整数次方
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+
+double Power(double base, int exponent) {
+    double re = 1;
+    if(base==0)
+        return 0;
+    else{
+        if(exponent==0)
+            return 1;
+        else{
+            if(exponent>0){
+                while(exponent!=0){
+                    re = re*base;
+                    exponent--;
+                }
+            }
+            else{
+                while(exponent!=0){
+                    re = re*base;
+                    exponent++;
+                }
+                re = 1/re;
+            }
+        }
+    }
+    return re;
+}
+
+//简单快速幂
+double Power(double base, int exponent) {
+    int e = abs(exponent);
+    double r = 1.0;
+    while(e){
+        if(e & 1) 
+            r *= base;
+        base *= base;
+        e >>= 1;
+    }
+    return exponent < 0 ? 1/ r : r;
+}
