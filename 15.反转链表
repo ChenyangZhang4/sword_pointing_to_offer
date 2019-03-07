@@ -1,0 +1,25 @@
+反转链表
+输入一个链表，反转链表后，输出新链表的表头。
+
+ListNode* ReverseList(ListNode* pHead) {
+    if(pHead==NULL)
+        return NULL;
+    ListNode* rHead = NULL;
+    ListNode* temp;
+    while(pHead!=NULL){
+        temp = pHead->next;
+        pHead->next = rHead;
+        rHead = pHead;
+        pHead = temp;
+    }
+    return rHead;
+}
+
+//递归
+ListNode* ReverseList(ListNode* pHead) {
+    if(pHead==NULL||pHead->next==NULL) return pHead;
+    ListNode* pReverseNode=ReverseList(pHead->next);
+    pHead->next->next=pHead;
+    pHead->next=NULL;
+    return pReverseNode; 
+}
