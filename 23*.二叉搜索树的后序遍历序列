@@ -1,0 +1,28 @@
+二叉搜索树的后序遍历序列
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。
+
+//[]要返回false，所以不能自己提供给递归函数一个[]
+bool VerifySquenceOfBST(vector<int> sequence) {
+    if(sequence.size()==0)
+        return false;
+    vector<int> v1;
+    vector<int> v2;
+    int i=0;
+    int k=sequence.size()-1;
+    for(; i<k; i++){
+        if(sequence[i]>sequence[k])
+            break;
+        v1.push_back(sequence[i]);
+    }
+    for(; i<k; i++){
+        if(sequence[i]<sequence[k])
+            return false;
+        v2.push_back(sequence[i]);
+    }
+    bool left=true, right=true;
+    if(v1.size())
+        left = VerifySquenceOfBST(v1);
+    if(v2.size())
+        right = VerifySquenceOfBST(v2);
+    return  left && right;
+}
