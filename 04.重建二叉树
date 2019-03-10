@@ -21,6 +21,6 @@ TreeNode* reConstructBinaryTree(vector<int> pre,vector<int> vin) {
         in_right.push_back(vin[j]);
     }
     root->left = reConstructBinaryTree(pre_left, in_left);
-    root->right = reConstructBinaryTree(pre_left, in_right);
+    root->right = reConstructBinaryTree(pre_right, in_right);
     return root;
 }
