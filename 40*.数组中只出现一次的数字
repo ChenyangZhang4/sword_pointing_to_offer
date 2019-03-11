@@ -1,0 +1,25 @@
+数组中只出现一次的数字
+一个整型数组里除了两个数字之外，其他的数字都出现了偶数次。请写程序找出这两个只出现一次的数字。
+
+void FindNumsAppearOnce(vector<int> data,int* num1,int *num2) {
+    int temp=0;
+    int k=0;
+    for(int i=0; i<data.size(); i++)
+        temp^=data[i];
+    while((temp&1)==0){
+        temp>>=1;
+        k++;
+    }
+    *num1=0;
+    *num2=0;
+    for(int i=0; i<data.size(); i++){
+        if(isBit(data[i], k)==0)
+            *num1^=data[i];
+        else
+            *num2^=data[i];
+    }
+}
+int isBit(int a, int k){
+    a>>=k;
+    return a&1;
+}
