@@ -3,10 +3,10 @@
 
 int FindGreatestSumOfSubArray(vector<int> array) {
     int res = array[0];
-    int max = array[0];
+    int max_number = array[0];
     for(int i=1; i<array.size(); i++){
-        max = max(max+array[i], array[i]);
-        res = max(max, res);
+        max_number = max(max_number+array[i], array[i]);
+        res = max(max_number, res);
     }
     return res;
 }
