@@ -1,0 +1,22 @@
+翻转单词顺序列
+“student. a am I”把句子单词的顺序翻转了，正确的句子应该是“I am a student.”
+
+string ReverseSentence(string str) {
+    int i=0, j=0, last=0;
+    while(i<str.size()){
+        if(str[i]!=' '){
+            last=i+1;
+            while(str[last]!=' ' && last<str.size())
+                last++;
+            j=last-1;
+            for(; i<j; i++,j--)
+                swap(str[i], str[j]);
+            i=last+1;
+        }
+        else
+            i++;
+    }
+    for(i=0,j=str.size()-1; i<j; i++,j--)
+        swap(str[i], str[j]);
+    return str;
+}
