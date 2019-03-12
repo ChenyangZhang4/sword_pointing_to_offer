@@ -1,0 +1,35 @@
+和为s的两个数字
+输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。
+对应每个测试案例，输出两个数，小的先输出。
+
+//然而第一组找到的数就是乘积最小的，下面可以省很多
+vector<int> FindNumbersWithSum(vector<int> array,int sum) {
+    vector<int> v;
+    if(array.size()==0)
+        return v;
+    int p1=0, p2=array.size()-1;
+    int i=p1, j=p2;
+    int multi=NULL;
+    while(p1<p2){
+        if(array[p1]+array[p2]==sum){
+            if(multi==NULL)
+                multi=array[p1]*array[p2];
+            if(array[p1]*array[p2]<=multi){
+                i=p1;
+                j=p2;
+                multi=array[p1]*array[p2];
+            }
+            p1++;
+            p2--;
+        }
+        else if(array[p1]+array[p2]<sum)
+            p1++;
+        else
+            p2--;
+    }
+    if(array[i]+array[j]==sum){
+        v.push_back(array[i]);
+        v.push_back(array[j]);
+    }
+    return v;
+}
