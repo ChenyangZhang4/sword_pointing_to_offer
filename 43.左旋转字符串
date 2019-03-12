@@ -1,0 +1,22 @@
+左旋转字符串
+对于一个给定的字符序列S，请你把其循环左移K位后的序列输出
+
+string LeftRotateString(string str, int n) {
+    string s;
+    for(int i=n; i<str.size(); i++)
+        s+=str[i];
+    for(int j=0; j<n; j++)
+        s+=str[j];
+    return s;
+}
+
+//如果想复杂些，可以利用YX=(XTYT)T
+string LeftRotateString(string str, int n) {
+    int len = str.size();
+    if(len == 0) return str;
+    n %= len;
+    for(int i = 0, j = n - 1; i < j; ++i, --j) swap(str[i], str[j]);
+    for(int i = n, j = len - 1; i < j; ++i, --j) swap(str[i], str[j]);
+    for(int i = 0, j = len - 1; i < j; ++i, --j) swap(str[i], str[j]);
+    return str;
+}
