@@ -1,0 +1,21 @@
+对称的二叉树
+请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。
+
+bool isSymmetrical(TreeNode* pRoot)
+{
+    if(!pRoot)
+        return true;
+    return sym(pRoot->left, pRoot->right);
+}
+bool sym(TreeNode* pleft, TreeNode* pright){
+    if(!pleft && !pright)
+        return true;
+    else if(pleft && pright){
+        if(pleft->val == pright->val)
+            return sym(pleft->left, pright->right) && sym(pleft->right, pright->left);
+        else
+            return false;
+    }
+    else
+        return false;
+}
