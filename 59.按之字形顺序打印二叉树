@@ -1,0 +1,41 @@
+按之字形顺序打印二叉树
+请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
+
+vector<vector<int> > Print(TreeNode* pRoot) {
+    vector<vector<int> > res;
+    if(!pRoot)
+        return res;
+    vector<int> v;
+    queue<TreeNode*> q1;
+    queue<TreeNode*> q2;
+    q1.push(pRoot);
+    while(!q1.empty() || !q2.empty()){
+        v.clear();
+        while(!q1.empty()){
+            v.push_back(q1.front()->val);
+            if(q1.front()->left)
+                q2.push(q1.front()->left);
+            if(q1.front()->right)
+                q2.push(q1.front()->right);
+            q1.pop();
+        }
+        res.push_back(v);
+        v.clear();
+        while(!q2.empty()){
+            v.push_back(q2.front()->val);
+            if(q2.front()->left)
+                q1.push(q2.front()->left);
+            if(q2.front()->right)
+                q1.push(q2.front()->right);
+            q2.pop();
+        }
+        if(!v.empty())
+            res.push_back(v);
+    }
+    int k=1;
+    while(k<res.size()){
+        reverse(res[k].begin(), res[k].end());
+        k+=2;
+    }
+    return res;
+}
