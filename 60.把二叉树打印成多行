@@ -1,0 +1,38 @@
+把二叉树打印成多行
+从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
+
+vector<vector<int> > Print(TreeNode* pRoot) {
+    vector<vector<int> > res;
+    if(!pRoot)
+        return res;
+    vector<int> v;
+    queue<TreeNode*> q1;
+    queue<TreeNode*> q2;
+    q1.push(pRoot);
+    while(!q1.empty() || !q2.empty()){
+        v.clear();
+        while(!q1.empty()){
+            v.push_back(q1.front()->val);
+            if(q1.front()->left)
+                q2.push(q1.front()->left);
+            if(q1.front()->right)
+                q2.push(q1.front()->right);
+            q1.pop();
+        }
+        res.push_back(v);
+        v.clear();
+        while(!q2.empty()){
+            v.push_back(q2.front()->val);
+            if(q2.front()->left)
+                q1.push(q2.front()->left);
+            if(q2.front()->right)
+                q1.push(q2.front()->right);
+            q2.pop();
+        }
+        if(!v.empty())
+            res.push_back(v);
+    }
+    return res;
+}
+
+//记录一下每次循环时的q.size()即可只用一个queue完成
