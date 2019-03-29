@@ -39,3 +39,5 @@ vector<vector<int> > Print(TreeNode* pRoot) {
     }
     return res;
 }
+
+//若用两个栈，且s2先压right再压left，就可以不用reverse了
