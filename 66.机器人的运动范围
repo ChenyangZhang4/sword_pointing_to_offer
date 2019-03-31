@@ -35,8 +35,5 @@ bool canEnter(int thr, int x, int y){
         sum+=y%10;
         y/=10;
     }
-    if(sum>thr)
-        return false;
-    else
-        return true;
+    return sum<=thr;
 }
