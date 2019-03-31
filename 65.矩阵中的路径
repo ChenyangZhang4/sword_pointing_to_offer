@@ -61,7 +61,7 @@ bool hasPath(char* matrix, int rows, int cols, char* str){
 bool isHsaPath(char *matrix,int rows,int cols,char *str,bool *isOk,int curx,int cury){
   if(*str=='\0')
        return true;
-  if(cury==cols){       //处理cury其实是假设可以循环过去，但是应该是不合理的
+  if(cury==cols){       //处理cury其实是假设最左接上行最末、最右接下行最开始，但这应该是不合理的
        curx++;
        cury=0;
   }
