@@ -6,7 +6,7 @@ int movingCount(int threshold, int rows, int cols)
     vector<vector<bool> > v(rows, vector<bool>(cols, false));
     mark(v, threshold, 0, 0, rows, cols);
     int counts=0;
-    for(int i=0; i<rows; i++)
+    for(int i=0; i<rows; i++)           //counts全局或者函数传递则可以省去这一部分
         for(int j=0; j<cols; j++)
             if(v[i][j])
                 counts++;
