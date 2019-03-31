@@ -1,0 +1,42 @@
+机器人的运动范围
+地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？
+
+int movingCount(int threshold, int rows, int cols)
+{
+    vector<vector<bool> > v(rows, vector<bool>(cols, false));
+    mark(v, threshold, 0, 0, rows, cols);
+    int counts=0;
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            if(v[i][j])
+                counts++;
+    return counts;
+}
+void mark(vector<vector<bool> > &v, int thr, int x, int y, int rows, int cols){
+    if(canEnter(thr, x, y) && v[x][y]==false){
+        v[x][y]=true;
+        if(x+1<rows)
+            mark(v, thr, x+1, y, rows, cols);
+        if(x-1>=0)
+            mark(v, thr, x-1, y, rows, cols);
+        if(y+1<cols)
+            mark(v, thr, x, y+1, rows, cols);
+        if(y-1>=0)
+            mark(v, thr, x, y-1, rows, cols);
+    }
+}
+bool canEnter(int thr, int x, int y){
+    int sum=0;
+    while(x>0){
+        sum+=x%10;
+        x/=10;
+    }
+    while(y>0){
+        sum+=y%10;
+        y/=10;
+    }
+    if(sum>thr)
+        return false;
+    else
+        return true;
+}
