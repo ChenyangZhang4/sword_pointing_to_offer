@@ -1,0 +1,31 @@
+字符串的排列
+输入一个字符串（长度不超过9(可能有字符重复),字符只包括大小写字母）,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+
+//排列：固定第0位，后位递归排列；依次将0位与后边某一位交换，后位再递归排列
+//此为偷懒写法，还有更复杂的写法可以直接无重复，更更复杂的直接是字典序
+vector<string> Permutation(string str) {
+    vector<string> v;
+    PermutationHelper(v, str, 0);
+    sort(v.begin(), v.end());
+    return v;
+}
+bool isExist(vector<string> &v, string &s){
+    for(int i=0; i<v.size(); i++){
+        if(v[i]==s)
+            return true;
+    }
+    return false;
+}
+void PermutationHelper(vector<string> &v, string &s, int from){ //递归，固定一个位，后面的位交换；这样得到的不是字典序
+    if(from==s.size()-1){
+        if(!isExist(v, s))
+            v.push_back(s);
+    }
+    else if(from<s.size()-1){
+        for(int j=from; j<s.size(); j++){       //j须从from开始而不是from+1。当j=from和from交换，即固定该位，递归变动后面的位
+            swap(s[j], s[from]);
+            PermutationHelper(v, s, from+1);
+            swap(s[j], s[from]);        //将序列from位还原
+        }
+    }
+}
