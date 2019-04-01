@@ -29,3 +29,62 @@ void PermutationHelper(vector<string> &v, string &s, int from){ //递归，固�
         }
     }
 }
+
+//去重的全排列就是从第一个数字起，每个数分别与“它后面非重复出现”的数字交换
+bool IsSwap(char* from, char* to){
+    char* p;
+    for(p = from; p < to; p++){
+        if(*p == *to)
+            return false;   
+    }   
+    return true;
+} 
+void AllPermutation(char* perm, int from, int to)
+{
+    if(from > to)
+        return; 
+    if(from == to) {    //假如要求是打印当前排列 
+        static int count = 1;    //局部静态变量，用来统计全排列的个数  
+        cout << count++ << ":" << perm;
+        cout << endl;
+    }
+    if(from < to) {    //用递归实现全排列 
+        for(int j = from; j <= to; j++)    //第j个字符分别与它后面的字符交换就能得到新的排列
+        {
+            if(IsSwap((perm + j), (perm + to)))
+            {
+                swap(perm[j], perm[from]);
+                AllPermutation(perm, from + 1, to);
+                swap(perm[j], perm[from]);
+            }
+        }
+    }
+}
+
+//next_permutation算法，不断生成下一最近字典序的排列，难
+bool NextPermutation(char* str){
+    assert(str);    //检查空指针
+    char *p, *q, *pFind;
+    char *pEnd = str + strlen(str) - 1;
+    if(str == pEnd)
+        return false;
+    p = pEnd;
+    while(p != str){
+        q = p;
+        p--;
+        if(*p < *q)    //找升序的相邻两数，前一个数即替换数
+        {
+            //从后向前找比替换点大的第一个数
+            pFind = pEnd;
+            while(*pFind <= *p) 
+                --pFind;
+            swap(*p, *pFind);
+            //替换点后的数全部反转
+            Reverse(q, pEnd);
+            return true; 
+        } 
+    }
+    //如果没有找到下一个排列，全部反转后返回false
+    Reverse(str, pEnd);   
+    return false; 
+}
