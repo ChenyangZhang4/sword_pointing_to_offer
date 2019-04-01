@@ -1,0 +1,36 @@
+数组中的逆序对
+在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007
+
+//因为数据量大，要用比int更大的类型，如longlong；或者及时%1000000007以使int仍够用
+int InversePairs(vector<int> data) {
+    long long p=0;
+    vector<int> temp;
+    for(int i=0; i<data.size(); i++)    //因为下一个函数的递归要交换data和temp，所以传进去的temp需要是复制好的
+        temp.push_back(data[i]);
+    p=InversePairsCore(data, temp, 0, data.size()-1);
+    return p%1000000007;
+}
+long long InversePairsCore(vector<int> &data, vector<int> &temp, int start, int end){   //注意这里返回类型要是longlong，否则在数据量大时出错
+    if(start==end){
+        temp[start]=data[end];
+        return 0;
+    }
+    int mid=(start+end)/2;
+    long long left=InversePairsCore(temp, data, start, mid);    //递归时交换temp和data，免去人为去交换其值
+    long long right=InversePairsCore(temp, data, mid+1, end);
+    int i=mid, j=end, k=end;
+    long long count=0;
+    while(i>=start && j>mid){
+        if(data[i]<=data[j])
+            temp[k--]=data[j--];
+        else{
+            temp[k--]=data[i--];
+            count+=(j-mid);
+        }
+    }
+    while(i>=start)             //这里还没排完序
+        temp[k--]=data[i--];
+    while(j>mid)
+        temp[k--]=data[j--];
+    return count+left+right;
+}
