@@ -1,0 +1,22 @@
+从1到n整数中1出现的次数
+求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次。并把问题更加普遍化,求出任意非负整数区间中1出现的次数（从1 到 n 中1出现的次数）。
+
+int NumberOf1Between1AndN_Solution(int n)
+{
+    int count=0;
+    int carry=1;
+    int curr=0, low=0, high=0;
+    while(n/carry!=0){
+        curr=n/carry%10;
+        low=n%carry;
+        high=n/10/carry;
+        if(curr==0)             //当当前位为0，出现1的次数=高位*位
+            count+=high*carry;
+        else if(curr==1)        //当当前位为1，出现1的次数=高位*位+（低位+1）
+            count+=high*carry+low+1;
+        else                    //当当前位为2~9，出现1的次数=（高位+1）*位
+            count+=(high+1)*carry;
+        carry*=10;
+    }
+    return count;
+}
