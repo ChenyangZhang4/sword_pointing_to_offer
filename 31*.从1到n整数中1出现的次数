@@ -10,7 +10,7 @@ int NumberOf1Between1AndN_Solution(int n)
         curr=n/carry%10;
         low=n%carry;
         high=n/10/carry;
-        if(curr==0)             //当当前位为0，出现1的次数=高位*位
+        if(curr==0)             //当当前位为0，当前位出现1的次数=高位*位
             count+=high*carry;
         else if(curr==1)        //当当前位为1，出现1的次数=高位*位+（低位+1）
             count+=high*carry+low+1;
