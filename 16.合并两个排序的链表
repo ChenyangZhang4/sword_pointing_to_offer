@@ -16,3 +16,25 @@ ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
         return pHead2;
     }
 }
+
+//非迭代
+ListNode* Merge(ListNode* pHead1, ListNode* pHead2){
+    ListNode* headNode = new ListNode(0);
+    ListNode* tempNode = headNode;
+    while (pHead1 && pHead2) {
+        if (pHead1->val < pHead2->val) {
+            tempNode->next = pHead1;
+            pHead1 = pHead1->next;
+        }
+        else {
+            tempNode->next = pHead2;
+            pHead2 = pHead2->next;
+        }
+        tempNode = tempNode->next;
+    }
+    if (!pHead1)
+        tempNode->next = pHead2;
+    if (!pHead2)
+        tempNode->next = pHead1;
+    return headNode->next;
+}
