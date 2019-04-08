@@ -6,6 +6,7 @@ bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
     if(pRoot1==NULL || pRoot2==NULL)
         return false;
     return doesSubtree(pRoot1, pRoot2) || HasSubtree(pRoot1->left, pRoot2) || HasSubtree(pRoot1->right, pRoot2);
+        //这个return是精髓，三种情况
 }
 bool doesSubtree(TreeNode* pRoot1, TreeNode* pRoot2){
     if(pRoot2==NULL)
