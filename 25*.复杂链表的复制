@@ -16,7 +16,7 @@ RandomListNode* Clone(RandomListNode* pHead)
     currNode = pHead;
     RandomListNode* cpNode = pHead->next;
     while(currNode!=NULL){
-        if(currNode->random!=NULL)
+        if(currNode->random!=NULL)          //这里是个易漏点
             cpNode->random = currNode->random->next;
         currNode = cpNode->next;
         cpNode = currNode->next;
