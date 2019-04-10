@@ -9,7 +9,7 @@ int GetUglyNumber_Solution(int index) {
     res[0] = 1;
     for(int i=1; i<index; i++){
         res[i] = min(res[p2]*2, min(res[p3]*3, res[p5]*5));
-        if(res[i]==res[p2]*2)
+        if(res[i]==res[p2]*2)   //注意这里要三个if，因为可能最小值可能不止一个，但要一次都跳过
             p2++;
         if(res[i]==res[p3]*3)
             p3++;
