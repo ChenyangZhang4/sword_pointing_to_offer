@@ -12,3 +12,22 @@ int FirstNotRepeatingChar(string str) {
     }
     return -1;
 }
+
+//自制hash表
+int FirstNotRepeatingChar(string str) {
+	vector<int> hashTable('z'-'A'+1, -2);   //这里容忍了'Z'和'a'之间的字符，这样就不用判断是大写还是小写了
+	int index = 0;
+	for (int i = 0; i < str.size(); i++) {
+		index = str[i] - 'A';
+		if (hashTable[index] == -2)
+			hashTable[index] = i;
+		else if (hashTable[index] >= 0)
+			hashTable[index] = -1;
+	}
+	sort(hashTable.begin(), hashTable.end());
+	for (int i = 0; i < hashTable.size(); i++) {
+		if (hashTable[i] >= 0)
+			return hashTable[i];
+	}
+	return -1;
+}
