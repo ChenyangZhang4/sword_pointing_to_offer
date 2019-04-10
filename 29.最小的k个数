@@ -1,6 +1,7 @@
 最小的k个数
 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
 
+//时间复杂度O(n^k)
 vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
     vector<int> v;
     if(k>input.size())
@@ -19,4 +20,26 @@ vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
         v.push_back(input[i]);
     }
     return v;
+}
+
+//时间复杂度O(n*k)
+vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
+	vector<int> res;
+	if (input.size() <= k || k <= 0)
+		return res;
+	int i = 0;
+	for (; i < k; i++)
+		res.push_back(input[i]);
+	sort(res.begin(), res.end());
+	for (; i < input.size(); i++) {
+		for (int j = 0; j<k; j++) {
+			if (res[j] > input[i]) {
+				for (int m = k - 1; m > j; m--)
+					res[m] = res[m - 1];
+				res[j] = input[i];
+				break;
+			}
+		}
+	}
+	return res;
 }
