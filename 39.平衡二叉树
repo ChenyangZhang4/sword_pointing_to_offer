@@ -29,5 +29,5 @@ int getDepth(TreeNode* root) {
     int right = getDepth(root->right);
     if (right == -1)
         return -1;
-    return abs(left - right) > 1 ? -1 : 1 + Math.max(left, right);
+    return abs(left - right) > 1 ? -1 : 1 + max(left, right);
 }
