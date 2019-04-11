@@ -6,7 +6,7 @@ bool IsBalanced_Solution(TreeNode* pRoot) {
     int d_left = TreeDepth(pRoot->left);
     int d_right = TreeDepth(pRoot->right);
     if(abs(d_left-d_right)<=1)
-        return IsBalanced_Solution(pRoot->left) && IsBalanced_Solution(pRoot->right);
+        return IsBalanced_Solution(pRoot->left) && IsBalanced_Solution(pRoot->right); //注意这个返回
     else
         return false;
 }
