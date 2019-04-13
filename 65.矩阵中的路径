@@ -23,7 +23,7 @@ bool HasPathFromThisPoint(char*matrix, int i, int rows, int cols, char* str, boo
         return true;
     bool res = false;
     flag[i] = false;
-    if (i + cols < rows*cols && matrix[i + cols] == *str && flag[i + cols]) {
+    if (i + cols < rows*cols && matrix[i + cols] == *str && flag[i + cols]) {       //不要忘了判断是否匹配
         res = HasPathFromThisPoint(matrix, i + cols, rows, cols, str + 1, flag);
         if (res)
             return true;
