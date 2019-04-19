@@ -13,7 +13,21 @@ bool duplicate(int numbers[], int length, int* duplication) {
     return false;
 }
 
-//不用map
+//创建flag标记
+bool duplicate(int numbers[], int length, int* duplication) {
+	vector<bool> flag(length, true);
+	for (int i = 0; i < length; i++) {
+		if (flag[numbers[i]])
+			flag[numbers[i]] = false;
+		else {
+			*duplication = numbers[i];
+			return true;
+		}
+	}
+	return false;
+}
+
+//不用map，加个length作为标记
 bool duplicate(int numbers[], int length, int* duplication) {
     for(int i=0;i!=length;++i){
         int index=numbers[i]%length;
