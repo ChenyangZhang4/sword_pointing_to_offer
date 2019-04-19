@@ -6,24 +6,22 @@
 如果是合法的数值表达则返回该数字，否则返回0
 
 int StrToInt(string str) {
-    for(int i=0; i<str.size(); i++){
-        if(i==0 && (str[i]=='+' || str[i]=='-'))
-            continue;
-        if(!(str[i]>='0' && str[i]<='9'))
-            return 0;
-    }
-    string s="";
-    int res=0;
-    int carry=1;
-    for(int i=str.size()-1; i>=0; i--){
-        if(i==0 && str[i]=='+')
-            break;
-        else if(i==0 && str[i]=='-'){
-            res = -res;
-            break;
-        }
-        res += carry*(str[i]-'0');
-        carry *= 10;
-    }
-    return res;
+	if (str.size() == 0)
+		return 0;
+	int length = str.size();
+	int i = 0;
+	int signal = 1;
+	if (str[i] == '+' || str[i] == '-' && length > 1) {
+		if (str[i] == '-')
+			signal = -1;
+		i++;
+	}
+	int res = 0;
+	for (; i < length; i++) {
+		if (str[i]<'0' || str[i]>'9')
+			return 0;
+		res *= 10;
+		res += str[i] - '0';
+	}
+	return res * signal;
 }
