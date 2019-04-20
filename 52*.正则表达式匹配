@@ -9,7 +9,7 @@ bool match(char* str, char* pattern)
     if(*str!='\0' && *pattern=='\0')    //*str=='\0'时仍有可能匹配
         return false;
     if(*(pattern+1)!='*'){
-        if(*str==*pattern || (*str!='\0' && *pattern=='.'))     //确保要去递归的str+1有效
+        if(*str==*pattern || (*str!='\0' && *pattern=='.'))     //确保要去递归的str+1有效，如果*str==*pattern成立则隐含了*str!='\0'
             return match(str+1, pattern+1);
         else
             return false;
