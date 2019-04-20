@@ -5,7 +5,7 @@
 ListNode* EntryNodeOfLoop(ListNode* pHead)
 {
     ListNode* temp;
-    ListNode* p = new ListNode(0);
+    ListNode* p = new ListNode(0); 
     if(!pHead)
         return NULL;
     while(pHead->next!=NULL && pHead->next!=p){
@@ -21,7 +21,7 @@ ListNode* EntryNodeOfLoop(ListNode* pHead)
 
 //不断链
 ListNode* EntryNodeOfLoop(ListNode* pHead){
-    if(pHead==null|| pHead->next==null|| pHead->next->next==null)
+    if(!pHead|| !pHead->next|| !pHead->next->next)
         return NULL;
     ListNode fast=pHead->next->next;
     ListNode slow=pHead->next;
@@ -37,7 +37,6 @@ ListNode* EntryNodeOfLoop(ListNode* pHead){
     }
     //循环出来的话就是有环，且此时fast==slow，相遇点位于环内
     //方法一：可以证明：起点到环入口的结点数 = n*环结点数 + 环结点数-环入口到相遇点的结点数
-    //方法二：相遇点转一圈得到环结点数x，再两个同速指针相差x，再相遇的点就是环入口
     fast=pHead;
     while(fast!=slow){
         fast=fast->next;
@@ -45,3 +44,23 @@ ListNode* EntryNodeOfLoop(ListNode* pHead){
     }
     return slow;
 }
+
+//方法二：相遇点转一圈得到环结点数x，再两个同速指针相差x，再相遇的点就是环入口
+    //假设p2为相遇点
+    p1 = p1->next;
+	int lengthOfCircle = 1;
+	while (p1 != p2) {
+		p1 = p1->next;
+		lengthOfCircle++;
+	}
+	p1 = pHead;
+    p2 = pHead;
+    while(lengthOfCircle){
+        p1 = p1->next;
+        lengthOfCircle--;
+    }
+	while (p1 != p2) {
+		p1 = p1->next;
+		p2 = p2->next;
+	}
+	return p1;
