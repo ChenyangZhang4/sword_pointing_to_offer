@@ -27,16 +27,16 @@ ListNode* deleteDuplication(ListNode* pHead){
     first->next = pHead;
     ListNode* p = pHead;
     ListNode* last = first;
-    while (p != null && p->next != null) {
+    while (!p && p->next != NULL) {
         if (p->val == p->next->val) {
             int val = p->val;
-            while (p!= null && p->val == val)
+            while (!p && p->val == val)
                 p = p->next;
-            last->next = p;
+            last->next = p;     //这里只变换next而没有让last改变指向，并且使若在到这里循环终止时会将next设为NULL；
         }
         else {
             last = p;
-            p = p.next;
+            p = p->next;
         }
     }
     return first->next;
