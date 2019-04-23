@@ -21,3 +21,27 @@ void inOrder(TreeNode* root, vector<TreeNode*> &v, int k){
         inOrder(root->right, v, k);
     }
 }
+
+//不用vector而用计数n
+TreeNode* KthNode(TreeNode* pRoot, int k)
+{
+	if (!pRoot || k < 1)
+		return NULL;
+	int n = 0;
+	TreeNode* res = InOrderHelper(pRoot, n, k);
+	return res;
+}
+TreeNode* InOrderHelper(TreeNode* root, int &n, int &k) {
+	if (!root)
+		return NULL;
+	TreeNode* left = InOrderHelper(root->left, n, k);
+	if (left)
+		return left;
+	n += 1;
+	if (n == k)
+		return root;
+	TreeNode* right = InOrderHelper(root->right, n, k);
+	if (right)
+		return right;
+	return NULL;
+}
