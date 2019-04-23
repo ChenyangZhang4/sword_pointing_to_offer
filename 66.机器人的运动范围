@@ -13,7 +13,7 @@ int movingCount(int threshold, int rows, int cols)
     return counts;
 }
 void mark(vector<vector<bool> > &v, int thr, int x, int y, int rows, int cols){
-    if(canEnter(thr, x, y) && v[x][y]==false){      //样例中(0,0)也可以false
+    if(canEnter(thr, x, y) && v[x][y]==false){      //样例中(0,0)在thr小于0时也是false
         v[x][y]=true;
         if(x+1<rows)
             mark(v, thr, x+1, y, rows, cols);
