@@ -12,3 +12,17 @@ bool Find(int target, vector<vector<int> > array) {
     }
     return false;
 }
+
+def Find(self, target, array):
+    m = len(array)
+    n = len(array[0])
+    i = 0
+    j = n - 1
+    while i < m and j >= 0:
+        if array[i][j] == target:
+            return True
+        elif array[i][j] < target:
+            i += 1
+        else:
+            j -= 1
+    return False
